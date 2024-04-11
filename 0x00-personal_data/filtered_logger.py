@@ -4,10 +4,11 @@ from typing import List
 import re
 
 
-def filter_datum(fields: List[str], redaction: str, message: str,
-                 seperator: str) -> str:
-    """ create a hash message using regex """
+def filter_datum(
+    fields: List[str], redaction: str, message: str, separator: str
+) -> str:
+    """doc doc doc"""
     for field in fields:
-        pattern = f"{field}=[^{seperator}]*"
-        mess = re.sub(pattern, rf"{field}={redaction}", message)
-    return mess
+        regex = f"{field}=[^{separator}]*"
+        message = re.sub(regex, f"{field}={redaction}", message)
+    return message
