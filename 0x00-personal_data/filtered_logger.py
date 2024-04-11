@@ -10,4 +10,4 @@ def filter_datum(fields: List[str], redaction: str, message: str,
     for field in fields:
         pattern = f"{field}=[^{seperator}]*"
         mess = re.sub(pattern, rf"{field}={redaction}", message)
-        return mess
+    return mess
