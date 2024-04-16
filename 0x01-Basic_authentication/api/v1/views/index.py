@@ -25,6 +25,7 @@ def stats() -> str:
     stats['users'] = User.count()
     return jsonify(stats)
 
+
 @app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
 def forbidden_route():
     """GET /api/v1/forbidden
@@ -32,6 +33,7 @@ def forbidden_route():
         - a default page that has error 403
     """
     return abort(403)
+
 
 @app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
 def unauthorized():
