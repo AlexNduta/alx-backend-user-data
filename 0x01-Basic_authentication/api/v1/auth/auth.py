@@ -12,10 +12,10 @@ class Auth:
 
     def authorization_header(self, request=None) -> str:
         """returns None"""
-        requests = request.arg.get()
-        return None
+        if request is None:
+            return None
 
     def current_user(self, requests=None) -> TypeVar('User'):
         """returns None"""
-        requests = request.arg.get()
-        return None
+        if request is None:
+            return None
