@@ -22,7 +22,7 @@ if auth_type == 'auth':
 @app.before_request
 def before_request_func():
     """ func to filter each request before reaching secured endpoints"""
-    mylist = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
+    excluded_paths = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
 
     if auth.require_auth(request.path, excluded_paths):
         return
