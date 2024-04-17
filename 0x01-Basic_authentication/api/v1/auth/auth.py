@@ -7,17 +7,26 @@ User = TypeVar('User')
 
 
 class Auth:
-    """Authentication class """
-    def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """ returns false"""
-        length = len(excluded_paths)
-        for x in excluded_paths:
-            if length is 0:
-                return True
-            else if path is x:
-                return True
+    """Authentication class
+    """
 
-        return False
+    def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
+        """ returns false
+        """
+        if path is None: # if the path does not exist, authenticate
+            return True
+        # if there are no excluded paths, auth is required
+        if not excluded_paths:
+            return True
+        # check if path ends with '/' else apend
+        normalized_path = path if path.endswith('/') else path + '/'
+
+        # check if normalized path is in the list of exluded paths
+        for ex_path in excluded_paths:
+            if ex_path.endswith and normalized_path == ex_path:
+                return False
+
+        return True
 
     def authorization_header(self, request=None) -> str:
         """returns None"""
