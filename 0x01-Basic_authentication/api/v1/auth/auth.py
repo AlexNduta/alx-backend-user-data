@@ -14,7 +14,7 @@ class Auth:
         for x in excluded_paths:
             if length is 0:
                 return True
-            else if path is in excluded_paths:
+            else if path is x:
                 return True
 
         return False
