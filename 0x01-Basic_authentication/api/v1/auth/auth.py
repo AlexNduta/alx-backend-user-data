@@ -34,7 +34,7 @@ class Auth:
         if request is None:
             return None
         # If Authorization is not in the request headers return Null
-        if 'Authorization' is not in request.headers:
+        if 'Authorization' is not request.headers:
             return None
         # return the value of the authorisation
         return request.headers.get('Authorization')
