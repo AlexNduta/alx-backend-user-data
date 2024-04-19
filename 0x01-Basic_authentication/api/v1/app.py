@@ -25,8 +25,9 @@ if auth_type == 'auth':
 @app.before_request
 def before_request_func():
     """Function to filter each request before reaching secured endpoints."""
+    # if auth is none, do nothing
     if auth is None:
-        return  # If no auth is needed, proceed without checks
+        return
 
     # List of paths that do not require authentication
     excluded_paths = ['/api/v1/status/', '/api/v1/unauthorized/',
