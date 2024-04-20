@@ -19,5 +19,5 @@ class BasicAuth(Auth):
         if starter is False:
             return None
 
-        after_basic = authorization_header.split("Basic ")
+        after_basic = authorization_header[6:]
         return after_basic
