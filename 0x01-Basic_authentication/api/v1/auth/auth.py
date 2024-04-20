@@ -13,7 +13,7 @@ class Auth:
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ Checks if authentication is required to access a path
         - path: String representing requested API
-        -excluded_paths: list of paths excluded from authentication 
+        -excluded_paths: list of paths excluded from authentication
         """
         # if the path does not exist, authenticate
         if path is None:
