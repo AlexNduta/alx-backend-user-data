@@ -9,6 +9,7 @@ import os
 
 from api.v1.views import app_views
 from api.v1.auth.auth import Auth
+from api.v1.auth.basic_auth import BasicAuth
 # Adjust import as necessary for your project structure
 
 app = Flask(__name__)
@@ -19,12 +20,12 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 auth = None
 auth_type = getenv('AUTH_TYPE')
 if auth_type == 'auth':
-    auth = Auth()
+    auth = BasicAuth()
 
-
+# run before processing any request
 @app.before_request
-def before_request_func():
-    """Function to filter each request before reaching secured endpoints."""
+def before_request_handler():
+    """Function to check each request before reaching secured endpoints."""
     # if auth is none, do nothing
     if auth is None:
         return
