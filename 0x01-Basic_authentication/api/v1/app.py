@@ -8,8 +8,6 @@ from flask_cors import CORS
 import os
 
 from api.v1.views import app_views
-from api.v1.auth.auth import Auth
-from api.v1.auth.basic_auth import BasicAuth
 # Adjust import as necessary for your project structure
 
 app = Flask(__name__)
@@ -18,8 +16,13 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 # Initialize auth
 auth = None
-auth_type = getenv('AUTH_TYPE')
+auth_type = os.getenv('AUTH_TYPE')
+# check if either is the specified
 if auth_type == 'auth':
+    from api.v1.auth.auth import Auth
+    auth = Auth()
+if auth_type == 'basic_auth':
+    from api.v1.auth.basic_auth import BasicAuth
     auth = BasicAuth()
 
 # run before processing any request
