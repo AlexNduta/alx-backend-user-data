@@ -11,7 +11,9 @@ class Auth:
     """
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """ returns false
+        """ Checks if authentication is required to access a path
+        - path: String representing requested API
+        -excluded_paths: list of paths excluded from authentication 
         """
         # if the path does not exist, authenticate
         if path is None:
@@ -30,16 +32,22 @@ class Auth:
         return True
 
     def authorization_header(self, request=None) -> str:
-        """returns None"""
+        """Authorisation header
+        -request : flask request object
+        """
         # if no requets is provided, return None
         if request is None:
             return None
-        # If Authorization is not in the request headers return Null
+        # If Authorization key is not in the request headers return Null
         if 'Authorization' is not request.headers:
             return None
-        # return the value of the authorisation
+        # return the value of the authorisation key
         return request.headers.get('Authorization')
 
     def current_user(self, requests=None) -> TypeVar('User'):
         """returns None"""
+        auth_header = requests.header.get('Authorization')
+        if not auth_header :
+            return None
+        if request is None:
         return None
