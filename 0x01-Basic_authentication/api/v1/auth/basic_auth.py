@@ -45,7 +45,7 @@ class BasicAuth(Auth):
 
     def extract_user_credentials(
             self, decoded_base64_authorization_header: str) -> (str, str):
-        """ extracts the user credentials from the decodes dtring 
+        """ extracts the user credentials from the decodes dtring
         Return: two strings (user email and password ) seperated by a colon
         """
 
@@ -63,4 +63,3 @@ class BasicAuth(Auth):
         # split the decoded string at the colon point
         email_pass = decoded_base64_authorization_header.split(':')
         return email_pass[0], email_pass[1]
-
