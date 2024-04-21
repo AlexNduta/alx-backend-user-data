@@ -6,6 +6,7 @@ from models.user import User
 from models.base import Base
 from typing import TypeVar
 
+
 class BasicAuth(Auth):
     """ empty for now"""
     def extract_base64_authorization_header(
@@ -91,4 +92,3 @@ class BasicAuth(Auth):
             return None
         except Exception:
             return None
-
