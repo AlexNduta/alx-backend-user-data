@@ -4,7 +4,7 @@ from .auth import Auth
 import base64
 from models.user import User
 from models.base import Base
-
+from typing import TypeVar
 
 class BasicAuth(Auth):
     """ empty for now"""
@@ -66,7 +66,7 @@ class BasicAuth(Auth):
         email_pass = decoded_base64_authorization_header.split(':')
         return email_pass[0], email_pass[1]
 
-    Add the method def user_object_from_credentials(
+    def user_object_from_credentials(
             self, user_email: str, user_pwd: str) -> TypeVar('User'):
         """ gets the user object from the credentials extracted from user
         - use the Search method from
