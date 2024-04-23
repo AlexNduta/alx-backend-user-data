@@ -1,0 +1,4 @@
+.sauth
+*.swp
+*.swo
+__pycache__
