@@ -33,3 +33,30 @@ class DB:
         self._session.add(user)
         self._session.commit()
         return user
+
+    def find_user_by(self, **criteria) -> User:
+        """ Takes key-word args and returns first user that matches
+            Args:
+            **criteria (dict) -> dictionary of key-value pairs of items 
+            we will use to search with
+            Returns:
+                User: The first user matvhing the provided criteria
+            raises:
+                InvalidRequestErro: if an invalid attribute is provided
+                NoResultFound: if no user matches the search criteria
+
+        """
+        # make a query to the DB
+        user_queried = self._session.query(User)
+        # loop through the items to validate the items(optional)
+        for key in criteria:
+            if key not in User.__dict__:
+                raise InvalidRequestError("Invalid attribute:{}".format(key))
+        # confirmm that we are only searching for the first item
+        if not user_queried.filter_by(**criteria).first:
+            return NoResultFound
+        # filer the items using the provided criteria
+        for usr in user_queried.filter_by(**criteria):
+            return usr
+
+        raise NoResultFound
