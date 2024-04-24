@@ -37,7 +37,7 @@ class DB:
     def find_user_by(self, **criteria) -> User:
         """ Takes key-word args and returns first user that matches
             Args:
-            **criteria (dict) -> dictionary of key-value pairs of items 
+            **criteria (dict) -> dictionary of key-value pairs of items
             we will use to search with
             Returns:
                 User: The first user matvhing the provided criteria
