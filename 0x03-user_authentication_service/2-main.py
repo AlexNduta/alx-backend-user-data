@@ -12,10 +12,10 @@ from sqlalchemy.orm.exc import NoResultFound
 my_db = DB()
 
 user = my_db.add_user("test@test.com", "PwdHashed")
-print(user.id)
+print(type(user))
 
-find_user = my_db.find_user_by(email="test@test.com")
-print(find_user.id)
+find_user = my_db.find_user_by(id=1)
+print(find_user.email, find_user.hashed_password)
 
 try:
     find_user = my_db.find_user_by(email="test2@test.com")

@@ -60,3 +60,24 @@ class DB:
             return usr
 
         raise NoResultFound
+
+    def update_user(self, user_id: int, **update_data) -> None:
+        """ Gets user details and updates them according to
+        input passed
+        Args:
+            user_id: This is the id we use to find a user
+            **update_data: This is info to update the user with
+        Return: None
+        """
+        # first find our user
+        user = self.find_user_by(id=user_id)
+        # loop through the keys to check if key exists
+        for key in update_data:
+            if not hasattr(user, key):
+                raise ValueError("No attribute {}".format(key))
+            # update specific attributes
+        for key, value in update_data.items():
+            setattr(user, key, value)
+
+            # self._session.add(user)
+            self._session.commit()
