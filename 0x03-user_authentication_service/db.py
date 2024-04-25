@@ -34,50 +34,24 @@ class DB:
         self._session.commit()
         return user
 
-    def find_user_by(self, **criteria) -> User:
-        """ Takes key-word args and returns first user that matches
-            Args:
-            **criteria (dict) -> dictionary of key-value pairs of items
-            we will use to search with
-            Returns:
-                User: The first user matvhing the provided criteria
-            raises:
-                InvalidRequestErro: if an invalid attribute is provided
-                NoResultFound: if no user matches the search criteria
+    def find_user_by(self, **kwargs) -> User:
+        """doc doc doc"""
+        try:
+            user = self._session.query(User).filter_by(**kwargs).one()
+        except NoResultFound:
+            raise
+        except InvalidRequestError:
+            raise
+        return user
 
-        """
-        # make a query to the DB
-        user_queried = self._session.query(User)
-        # loop through the items to validate the items(optional)
-        for key in criteria:
-            if key not in User.__dict__:
-                raise InvalidRequestError("Invalid attribute:{}".format(key))
-        # confirmm that we are only searching for the first item
-        if not user_queried.filter_by(**criteria).first:
-            return NoResultFound
-        # filer the items using the provided criteria
-        for usr in user_queried.filter_by(**criteria):
-            return usr
-
-        raise NoResultFound
-
-    def update_user(self, user_id: int, **update_data) -> None:
-        """ Gets user details and updates them according to
-        input passed
-        Args:
-            user_id: This is the id we use to find a user
-            **update_data: This is info to update the user with
-        Return: None
-        """
-        # first find our user
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """doc doc doc"""
         user = self.find_user_by(id=user_id)
-        # loop through the keys to check if key exists
-        for key in update_data:
-            if not hasattr(user, key):
-                raise ValueError("No attribute {}".format(key))
-            # update specific attributes
-        for key, value in update_data.items():
-            setattr(user, key, value)
 
-            # self._session.add(user)
-            self._session.commit()
+        for key, value in kwargs.items():
+            if hasattr(user, key):
+                setattr(user, key, value)
+            else:
+                raise ValueError
+
+        self._session.commit()
